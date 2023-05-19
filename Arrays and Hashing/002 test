@@ -1,1 +1,36 @@
+// hashmap solution, similar to neetcode python implementation
+/* Day 1/150  Solved 2/150
+Challenge 242
+15min but with video help
+Learnt the hasmmaps(unordered_map) syntax
+*/
 
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        unordered_map<char,int> smap;
+        unordered_map<char,int> tmap;
+
+        if(t.size() != s.size()){ return false;}
+        
+        //smap.insert(makepair('a'))
+        //smap['a'] = 5;
+        
+        //Filling the hash maps
+        for(int i=0; i<s.size(); i++){
+            smap[s[i]]++;
+            tmap[t[i]]++;
+        }
+
+        //Compare Hashmap
+        for(int i=0; i<smap.size(); i++){
+            //printf("c: %d %c\n", smap[i], 'a'+i);
+            if(smap[i] != tmap[i]) {
+                return false;
+            }
+
+        }        
+        return true;
+
+    }
+};
