@@ -1,0 +1,24 @@
+/* Done, unassisted in 10 min.
+Day 1/150 of Leet Code
+ */
+
+class Solution {
+public:
+    int j=0;
+    bool containsDuplicate(vector<int>& nums) {
+        printf("nums: %d", nums.size());
+        for (int i =0; i<nums.size(); i++){
+            for(j=i+1; j<nums.size();j++){
+                if(j== nums.size()){
+                    //to make sure you dont compare numbers outside of array
+                    return false;
+                }
+                if(nums[j]==nums[i]){
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+};
