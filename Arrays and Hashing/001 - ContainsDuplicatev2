@@ -1,0 +1,51 @@
+/* /* Done, unassisted in 10 min.
+Day 1/150 of Leet Code, remade this exercise in order to create o(n) complexity
+Code Challenge 217 Under Arrays and Hashing
+ */
+
+class Solution {
+public:
+    int j=0;
+    bool containsDuplicate(vector<int>& nums) {
+        //Use an Hashset to make it time complexity o(n)
+        unordered_set<int> hashset;
+        
+        for (int i =0; i<nums.size(); i++){
+            if(hashset.find(nums[i]) != hashset.end()){
+                //if it is diff from end, then it found duplicate
+                return true;
+
+            }
+            hashset.insert(nums[i]);
+        }
+        return false;
+    }
+};
+
+// Return of hash.find(key): It returns an iterator to the element if found, else returns an iterator pointing to the end of unordered_set.
+
+
+/* /* Done, unassisted in 10 min.
+Day 1/150 of Leet Code
+ */
+/*
+class Solution {
+public:
+    int j=0;
+    bool containsDuplicate(vector<int>& nums) {
+        printf("nums: %d", nums.size());
+        for (int i =0; i<nums.size(); i++){
+            for(j=i+1; j<nums.size();j++){
+                if(j== nums.size()){
+                    //to make sure you dont compare numbers outside of array
+                    return false;
+                }
+                if(nums[j]==nums[i]){
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+}; */
