@@ -1,4 +1,6 @@
-
+/* Day 2/150  Solved 3/150
+Challenge 217
+10min but bad implementation, due to simple methods. Will use video for version 2
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
