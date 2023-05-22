@@ -1,0 +1,51 @@
+/* Day 2/150  Solved 3/150
+Challenge 217
+Video Solution to decrease Runtime
+*/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> solution;
+        map<int,int> map; // val : index
+
+        for(int i=0; i<nums.size(); i++){
+            if(map.find(target - nums[i]) != map.end()){
+                //When it founds, put the index and find the complement in map
+                
+                solution.push_back(map[target-nums[i]]);
+                solution.push_back(i);                
+            }
+            else{
+
+                //if it can-t find it, then we add it
+                map.insert({nums[i],i});
+            }
+            
+        } 
+    return solution;
+    }
+};
+/*
+10min but bad implementation, due to simple methods. Will use video for version 2
+*/
+
+/*
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> solution(2);
+        for (int i= 0; i < nums.size(); i++){
+            for(int j = i+1; j<nums.size(); j++){
+                if (nums[i]+nums[j] == target){
+                   // solution[0] = nums[i];
+                   solution[0] = i;
+                   solution[1] = j;
+                    //solution[1] = nums[j];
+                }
+            }
+        }
+    return solution;
+
+    }
+};
+*/
