@@ -1,0 +1,23 @@
+// Not a challenge from the roadmap, but was usefull to practice and learn sliding window
+//day 2
+
+class Solution {
+public:
+    int countGoodSubstrings(string s) {
+        int counter=0;
+        if(s.size()<=2){
+            printf("abccc\n");
+            return 0;
+        }
+        for (int i=0;i<s.size()-2;i++){
+            //printf("%c ", s.at(i));
+            if(s.at(i) != s.at(i+1) && s.at(i) != s.at(i+2) && s.at(i+1) != s.at(i+2) ){
+                counter++;
+                printf("%c%c%c\n", s.at(i), s.at(i+1), s.at(i+2));
+            }
+        }
+        
+        return counter;
+    }
+    
+};
