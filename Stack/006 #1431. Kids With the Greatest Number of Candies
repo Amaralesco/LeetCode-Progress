@@ -1,0 +1,41 @@
+//Typical exercise for a Stack Data structure
+#include <stack>
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> test;
+
+        for(int i =0; i<s.size();i++){
+            if(s.at(i) == '(' || s.at(i) == '{' || s.at(i) == '[' ){
+                test.push(s.at(i));
+            }
+            
+            else{
+                if(test.empty()){return false;} //edge case, it started with a closed parenthesis
+                switch(test.top()){
+                case '(':
+                    if(s.at(i) != ')'){return false;}
+                    test.pop();
+                    //printf("top: %c", test.top());
+                    continue;
+                case '[':
+                    if(s.at(i) != ']'){return false;}
+                    test.pop();
+                    continue;
+                    
+                case '{':
+                    if(s.at(i) != '}'){return false;}
+                    test.pop();
+                    continue;
+                default:
+                    continue;
+                }    
+            }
+            
+            
+            //i will increment and became even again
+        }    
+        if(!test.empty()){return false;}
+        return true;
+    }
+};
