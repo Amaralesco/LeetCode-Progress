@@ -1,0 +1,38 @@
+//This one took me a while, as i was on the right track but gave as it seemed it wouldnt work in odd sized strings.
+//Also, after viewing the video, used some of the functions in STLibrary to clean the code
+/* Day 3/150  
+    Neetcode: Solved 5/150
+    Leetcode: Solved 7 Easy 1 Medium
+Challenge: 125. Valid Palindrome
+Learnt: Practice, and 2 Pointer alghoritm execution
+*/
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        //remove(s.begin(), s.end(), ' '); //removes white space
+        
+        if(s.empty()){return true;}
+        int size = s.size();
+        int left=0;
+        int right = size-1;
+        
+        while(left<right){
+            while(!isalnum(s[left]) && left<right){
+                left++;
+            }
+            while(!isalnum(s[right]) && left<right){
+                right--;
+            }
+            if(tolower(s[left]) != tolower(s[right])){
+                return false;
+            }
+            printf("compared %c:%c at %d\n", s[left],s[right],left);
+            left++;
+            right--;
+        }
+        return true;
+    }
+    
+    
+};
