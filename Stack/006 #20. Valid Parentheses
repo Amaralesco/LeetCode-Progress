@@ -1,4 +1,12 @@
 //Typical exercise for a Stack Data structure
+/* Day 3/150  
+    Neetcode: Solved 4/150
+    Leetcode: Solved 6 Easy 1 Medium
+Challenge 20 Valid Parentheses
+Learnt: the stack syntax
+*/
+
+
 #include <stack>
 class Solution {
 public:
