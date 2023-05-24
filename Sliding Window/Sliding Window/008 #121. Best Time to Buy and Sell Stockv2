@@ -1,0 +1,69 @@
+//Checked the video to find this solution, which makes it much more clean. Although correct, i was overcomplicating the problem
+/* Day 5/150  
+    Neetcode: Solved 6/150
+    Leetcode: Solved 7 Easy 1 Medium
+Challenge: #121. Best Time to Buy and Sell Stock
+Learnt: Problem solving 
+*/
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int maxProfit = 0;
+        int left = 0;
+        int right = 0;
+        while(left<prices.size()){
+            if(prices[right]>prices[left]){
+                maxProfit = max(maxProfit, prices[right]-prices[left] );
+            }
+            else{
+                left=right; // shift buying day to the lowst stock price
+            }
+            right++;
+             
+        }
+        return maxProfit;
+    }
+};
+
+/* class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size()<2){return 0;}
+       
+        int profit = prices[1]-prices[0];
+        int max_profit=0; // valued in €
+        int buy,sell; //days
+        int min_buy,max_sell; //Values in €
+        bool reset;
+        min_buy = prices[0];
+        max_sell = prices[1];
+        
+        for(buy=0,sell=1; sell<prices.size();){
+            if (reset){
+                
+                reset=false;
+                max_sell = prices[sell];
+                buy = --sell;
+                min_buy = prices[buy];
+            }
+            profit = prices[sell]-prices[buy];
+            printf("profit: %d€ \n|Day_B:%d at %d€ && day_S:%d at %d€  \n",profit,buy,prices[buy],sell, prices[sell]);
+            printf("despiste variaveis: min_buy:%d max_sell:%d max_profit:%d\n",min_buy,max_sell, max_profit);
+            
+            if(prices[sell]>=max_sell && profit>=max_profit ){
+                //printf("entrou!\n");
+                max_sell = prices[sell];
+                min_buy = prices[buy];
+                max_profit = profit;
+            }
+            if(prices[sell] < min_buy){ //we might have found a better buying point, so we reset the window
+                
+                reset = true;
+                //sell in next iteration will be buy+1
+            }
+            sell++;
+            printf("\n");
+        }
+    return max_profit;
+    }
+}; */
