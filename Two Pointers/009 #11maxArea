@@ -1,0 +1,32 @@
+/* Day 5/150  
+    Neetcode: Solved 6/150
+    Leetcode: Solved 8 Easy 1 Medium
+Challenge: #11. Container With Most Water
+Learnt: Problem solving and execution of 2 pointers
+*/
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n= height.size();
+        int max_area=0;
+        //Area= height x n
+        int left,right;
+        left=0; right = n-1;
+        int area;
+        int real_height;
+        while (left<right){
+            real_height = min(height[left],height[right]);
+            area = real_height * (right-left);
+
+            max_area=max(max_area,area);
+            if(height[left]<=height[right]){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return max_area;
+    }
+};
