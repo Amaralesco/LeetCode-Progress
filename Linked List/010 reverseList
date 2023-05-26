@@ -1,0 +1,40 @@
+/* Day 5/150  
+    Neetcode: Solved 7/150
+    Leetcode: Solved 9 Easy 1 Medium
+Challenge: #206. Reverse Linked List
+Learnt: Learn how linked list work and syntax, little confusing tbh
+*/
+
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (head == NULL || head->next == NULL)
+            return head;
+        
+        //printf("head %d",*head);
+        ListNode *prev = NULL;
+        ListNode *curr = head;
+
+        while (curr != NULL)
+        {
+            ListNode *temp = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+        
+    }
+};
