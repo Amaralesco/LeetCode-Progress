@@ -1,5 +1,5 @@
 /* Day 6/150  
-    Neetcode: Solved 9/150
+    Neetcode: Solved 8/150
     Leetcode: Solved 10 Easy 1 Medium
 Challenge: #168. Two Sum II
 Learnt: Problem solving and execution of 2 pointers

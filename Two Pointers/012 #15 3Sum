@@ -1,6 +1,70 @@
-/* Day 7/150  
-    Neetcode: Solved 10/150
+/* Day 8/150  
+    Neetcode: Solved 9/150
     Leetcode: Solved 11 Easy 1 Medium
 Challenge: #15 3 Sum
-Learnt: 
+Learnt: Good to practice 2 pointers a little bit outside of the box
+Had to get a little help for the edge cases but overall great exercise
 */
+
+//Sort first, iterate trough all with one pointer to the second number and a the other to the last. Increment or decrement these indexes as required
+// To mind the edge cases with 3+ equual numbers, (de)increment while the following number is the same 
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+         vector<vector<int>> solution;
+        int left;
+        int right;
+        int solution_counter=0;
+        sort(nums.begin(),nums.end());
+        /* for(int i=0;i<nums.size();i++){
+            cout<<nums[i];
+        } */
+
+        //iterate through all the numbers, and then use 2 pointers to check the combinations for the other 2
+        for(int i=0;i<nums.size()-2;i++){
+            left = i+1; right=nums.size()-1;
+            printf("Testing: %d aka %d\n",i, nums[i]);
+
+            //This is a smart way to reduce runtime
+            if (nums[i] > 0) {
+                break;
+            }
+
+            //This is for the edge case where the numbers are the same
+            if (i > 0 && nums[i - 1] == nums[i]) {
+                continue;
+            }
+
+            while(left<right){
+                //printf("combination: %d %d %d = %d\n", nums[i],nums[left],nums[right],nums[i]+nums[left]+nums[right]);
+                if(nums[i]+nums[left]+nums[right] == 0){
+                    //good, add to solution
+                    solution.push_back( {nums[i],nums[left],nums[right]});
+                    
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+                    left++;
+                    
+                    while (left < right && nums[right - 1] == nums[right]) {
+                        right--;
+                    }
+                    right--;
+                    
+                    
+                }
+                else if(nums[i]+nums[left]+nums[right]>0){
+                    //we need a smaller number instead,which are towards the begining of the array ;
+                    right--;
+                }
+                else if(nums[i]+nums[left]+nums[right]<0){
+                    //we need a bigger number, which are towards the end of the array
+                    left++;
+                }
+            }
+        }
+
+    return solution;
+    }
+};
