@@ -1,0 +1,43 @@
+
+/* Day 10/150  
+    Neetcode: Solved 11/150
+    Leetcode: Solved 10 Easy 5 Medium
+Challenge: #347. Top K Frequent Elements
+
+Complexity is nested loops, but this is a cool example because we can avoid the triple nested loops. We do this by nest looping collums and rows, 
+by identifying which area the new number belongs to, create an array for it and make sure we don’t add a duplicate to that one.
+This duplicate verification is boolean 2D array[collums][number] || array[row][number] || array[area][number]   
+
+Learnt: Brute force, some times is the answear. So for this challenges even if i don't know a "smart" algorithm or pattern for it, try the brute force and adjust
+*/
+
+
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        const int cnt = 9;
+        bool row[cnt][cnt] = {false};
+        bool col[cnt][cnt] = {false};
+        bool sub[cnt][cnt] = {false};
+        
+        for(int r = 0; r < cnt; ++r){
+            for(int c = 0; c < cnt; ++c){
+                if(board[r][c] == '.')
+                    continue; // if not number pass
+                
+                int idx = board[r][c] - '0' - 1; //char to num idx
+                int area = (r/3) * 3 + (c/3);
+                
+                //if number already exists
+                if(row[r][idx] || col[c][idx] || sub[area][idx]){
+                    return false;
+                }
+                
+                row[r][idx] = true;
+                col[c][idx] = true;
+                sub[area][idx] = true;
+             }
+        }
+        return true;
+    } 
+}; 

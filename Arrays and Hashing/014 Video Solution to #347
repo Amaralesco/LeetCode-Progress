@@ -1,10 +1,9 @@
 /* Day 10/150  
     Neetcode: Solved 11/150
     Leetcode: Solved 10 Easy 4 Medium
-Challenge: #150 Evaluate Reverse Polish Notation aka weird calculator with stack
-Learnt: Good to practice problem solving
+Challenge: #347. Top K Frequent Elements
 
-Convert string to int with stoi(), then push it to stack if its a number, else (aka operand) make two pops and do the respective calc. Key part is pushing the solution back to the stack, so it is first parameter of the next calculation
+Learnt: Pretty much anything, this is too hard of a challenge, decided to practice more easy array examples
 */
 
 
