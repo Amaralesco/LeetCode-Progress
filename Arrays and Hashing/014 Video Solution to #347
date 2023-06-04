@@ -1,0 +1,39 @@
+/* Day 10/150  
+    Neetcode: Solved 11/150
+    Leetcode: Solved 10 Easy 4 Medium
+Challenge: #150 Evaluate Reverse Polish Notation aka weird calculator with stack
+Learnt: Good to practice problem solving
+
+Convert string to int with stoi(), then push it to stack if its a number, else (aka operand) make two pops and do the respective calc. Key part is pushing the solution back to the stack, so it is first parameter of the next calculation
+*/
+
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        int n = nums.size();
+        
+        unordered_map<int, int> m;
+        for (int i = 0; i < n; i++) {
+            m[nums[i]]++;
+        }
+        
+        vector<vector<int>> buckets(n + 1);
+        for (auto it = m.begin(); it != m.end(); it++) {
+            buckets[it->second].push_back(it->first);
+        }
+        
+        vector<int> result;
+        
+        for (int i = n; i >= 0; i--) {
+            if (result.size() >= k) {
+                break;
+            }
+            if (!buckets[i].empty()) {
+                result.insert(result.end(), buckets[i].begin(), buckets[i].end());
+            }
+        }
+        
+        return result;
+    }
+};
