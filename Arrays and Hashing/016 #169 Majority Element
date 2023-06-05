@@ -1,0 +1,31 @@
+//Time complexity O(N)
+/* Day 10/150  
+    Neetcode: Solved 11/150
+    Leetcode: Solved 9 Easy 6 Medium
+Challenge: #169. Majority elements
+
+map the numbers and pair them with a count, mathmatically speaking you can only have 1 number with count bigger than half the array size, so thats what you look for when iterating the map
+
+Learnt: Problem solving, and a little bit about how to iterate trough and array (and map) using auto it : map
+*/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+         map<int,int> map; // val : count
+        
+        //this fills out the array
+        for(int i=0; i<nums.size(); i++){
+            map[nums[i]]++;
+        }
+
+        for(auto it : map){
+            // since it is a map it.second means it is accesing the "y" value of the pair in map (x:y)
+            if (it.second > nums.size()/2){
+                return it.first;
+            }
+        }
+
+        return 0;
+    }
+};
