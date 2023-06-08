@@ -8,6 +8,8 @@ Learnt: Recursive or backtracking functions
 
 Summary:  Recursive function that favors opening a parenthesis and then if closing is still valid also opens another one
 
+//Time: 45min
+
 */
 class Solution {
 public:

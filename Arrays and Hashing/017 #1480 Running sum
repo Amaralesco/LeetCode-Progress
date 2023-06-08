@@ -1,0 +1,30 @@
+//Time complexity: O(n)
+/* Day 11/150  
+    Neetcode: Solved 13/150
+    Leetcode: Solved 9 Easy 8 Medium
+Challenge: #1480 Running Sum of 1d Array: Pretty easy
+
+Learnt: Can't acess or use array[i] if i havent populated it yet. i.e array[0] = x. Instead use array.push_back(x)
+
+Summary:  Loop where u add the next value to the overall saved sum
+
+//Time: 45min
+
+*/
+class Solution {
+public:
+    vector<int> runningSum(vector<int>& nums) {
+        vector<int> solution;
+        int sum;
+        solution.push_back(nums[0]);
+        if(nums.size()==1){return solution;}
+        
+        //printf("%d \n", solution[0]);
+        
+        for(int i=1; i<nums.size(); i++){
+            sum = solution[i-1];
+            solution.push_back(sum + nums[i]);
+        }
+        return solution;
+    }
+};
