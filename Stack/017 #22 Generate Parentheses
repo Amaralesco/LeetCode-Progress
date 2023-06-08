@@ -1,0 +1,57 @@
+//Time complexity O(N^2)
+/* Day 11/150  
+    Neetcode: Solved 13/150
+    Leetcode: Solved 9 Easy 7 Medium
+Challenge: #22 Generate Parentheses
+
+Learnt: Recursive or backtracking functions
+
+Summary:  Recursive function that favors opening a parenthesis and then if closing is still valid also opens another one
+
+*/
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> solution;
+        
+        /*Logic dictates these 2 rules
+        1. You can only add  "(" if the number of '(' open is smaller than number of 'n' successful pairs need
+        2. You can only add ')' if the number of ')' closed is less than '(' open
+
+        Validate if '(' Open == ')' Closed == n
+        
+        Since sometimes both rules are true, we should make a recursive function that favors opening a parethesis and then if still valid closes
+        */
+        recursive_generator(n,0,0,"",solution);
+        return solution;
+
+
+    }
+    private:
+    void recursive_generator(int n, int open_cnt ,int close_cnt,string str, vector<string>& solution){
+        if(open_cnt == n && close_cnt == n){
+            //valid
+            solution.push_back(str);
+        }
+
+        // This works because in one iteration, if both rules are true it will create two instances of recursive_generator()
+        
+        // i.e with n=3
+        //it=0: str = ""  
+        //it=1: str = "(" || calls 2
+        //it=2: str = "()" && "((" || calls 2
+        //it=3: str = "()("            && "(((" // calls 3 (4th doenst obey open<n)
+        //it=4: str = "()()" && "()((" && "((()"  
+        //it=...
+
+        if(open_cnt < n){
+            recursive_generator(n,open_cnt+1,close_cnt, str + '(', solution);
+        }
+        if(close_cnt < open_cnt){
+            //you closed one pair here;
+    
+            recursive_generator(n,open_cnt,close_cnt+1,str + ')',solution);
+        }
+
+    }
+};
