@@ -8,7 +8,7 @@ Learnt: Can't acess or use array[i] if i havent populated it yet. i.e array[0] =
 
 Summary:  Loop where u add the next value to the overall saved sum
 
-//Time: 45min
+//Time: 15min (most was trouble shooting)
 
 */
 class Solution {
