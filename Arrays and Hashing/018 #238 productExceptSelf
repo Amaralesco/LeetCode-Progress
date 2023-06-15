@@ -1,0 +1,45 @@
+//The solutions/algorithm or "idea" wasnt mine, but i was the one that coded it
+
+//Time complexity: O(n)
+
+/* Day 12/150  
+    Neetcode: Solved 14/150
+    Leetcode: Solved 9 Easy 9 Medium
+Challenge: #1480 Running Sum of 1d Array: Pretty easy
+
+Learnt: Can't acess or use array[i] if i havent populated it yet. i.e array[0] = x. Instead use array.push_back(x)
+        Also cool algorithm
+
+Summary:  Calculate prefix products forward, then postfix backwards in a 2nd pass
+//Time: 75min 
+
+*/
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        
+        vector<int> solution(nums.size());
+        
+        //it:0 = prev[0]:Null    | post[3]: Null
+        //it:1 = prev[1]:1       | post[2]: 4 
+        //it:2 = prev[2]:1*2     | post[1]:3*4
+        //it:3 = prev[3]:1*2*3   | post[0]:2*3*4
+        int previous_multiplications=1;
+        int posterior_multiplications=1;
+
+
+        for(int i = 0; i<nums.size(); i++){
+            solution[i]=previous_multiplications;
+            previous_multiplications = previous_multiplications * nums[i]; //for the next iteration;
+            //cout << "previous " << solution[i]  <<endl;            
+        }
+        for(int i = nums.size()-1; i>=0; i--){
+            solution[i]= posterior_multiplications * solution[i];
+            posterior_multiplications = posterior_multiplications * nums[i];
+            //cout << "i:" << i <<" post " << posterior_multiplications << " solution " << solution[i]  <<endl;      
+        }
+
+
+        return solution;
+    }
+};
