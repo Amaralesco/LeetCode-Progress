@@ -1,0 +1,28 @@
+//Typical exercise for sliding window algorithm, increases the window while letter is different, reset once it is the same 
+
+//REDO THIS ONE
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int solution=0;
+        int count=0;
+        unordered_map<char,int> clean_slate;
+        for (int i=0; i<s.size();i++){
+            if(clean_slate.find(s.at(i)) == clean_slate.end()){
+                cout << "exists " << s.at(i) <<" at "<< i << endl;
+                unordered_map<char,int> clean_slate;
+                if(count > solution){
+                    solution = count;
+                }
+                count =0;
+            }
+            count++;
+            clean_slate.insert({s.at(i),1});
+
+        }
+
+
+        return solution;
+    }
+};
