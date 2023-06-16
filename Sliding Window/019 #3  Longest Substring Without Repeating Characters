@@ -1,0 +1,84 @@
+//Typical exercise for sliding window algorithm, increases the window while letter is different, reset once it is the same 
+// Peaked Solution to understand which data structure was being used: unordered set
+// Then it was a pretty easy
+
+/* Day 13/150 (too tired to finish)
+   Day 14/150 finished it - I am still one day behind as i missed day "12" 
+    Neetcode: Solved 15/150
+    Leetcode: Solved 9 Easy 10 Medium
+Challenge: #3. Longest Substring Without Repeating Characters: Very good for problem solving
+
+Learnt: unordered set
+/* An unordered_set is an unordered associative container implemented using a hash table where keys are hashed into indices of a hash table so that the insertion is always randomized. All operations on the unordered_set take constant time O(1) on an average which can go up to linear time O(n) in the worst case which depends on the internally used hash function, but practically they perform very well and generally provide a constant time lookup operation.  */
+
+    //Time: O(n)
+    //Space: O(n)
+
+//Time: 25min 
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char> charSet;
+        if(s.empty()){return 0;}
+        
+        int i=0;
+        int j = 0;
+
+        int count = 0;
+        int solution = count;
+        while (i<s.size()) {
+            if (charSet.find(s.at(i)) == charSet.end()){
+                //aka didnt' find it
+                charSet.insert(s.at(i));
+                i++;
+                /*  count++;
+                if (count>solution){
+                    solution = count;
+                } */
+
+                //Took this from solution, much faster and eloquent: Also less memory
+                solution = max(solution, i - j );
+            }
+            else{
+                // j starts start eliminating from the begining untill no longer viable 
+                charSet.erase(s.at(j));
+                count--;
+                j++;
+                /* charSet.clear();
+                charSet.insert(s.at(i));
+                count = 1; */
+            }
+
+        }
+        return solution;
+    }
+};
+
+// REDO - below was wrong btw
+
+/* class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int solution=0;
+        int count=0;
+        unordered_map<char,int> clean_slate;
+        clean_slate.push_back(s.at(0));
+        for (int i=1; i<s.size();i++){
+            if(clean_slate.find(s.at(i)) == clean_slate.end()){
+                cout << "exists " << s.at(i) <<" at "<< i << endl;
+                unordered_map<char,int> clean_slate;
+                if(count > solution){
+                    solution = count;
+                }
+                count =0;
+            }
+            count++;
+            clean_slate.insert({s.at(i),1});
+
+        }
+
+
+        return solution;
+    }
+}; */
