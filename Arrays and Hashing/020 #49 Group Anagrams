@@ -1,0 +1,80 @@
+//Didnt really get this solution tbh: Recheck the video https://youtu.be/vzdNOK2oB2E
+
+//You may redo this, but i believe the solution is elegant, and unless you can't come up with it by yourself, the coding part here is not that big deal
+
+
+/*  Day 15/150 finished it - I am still one day behind as i missed day "12" 
+    Neetcode: Solved 16/150
+    Leetcode: Solved 9 Easy 11 Medium
+Challenge: #49. Group Anagrams: I wouln-t redo it, but only copied the solution here, as i coulnt come up with it by myself
+                                 i believe the solution is elegant, and unless you can't come up with it by yourself, the coding part here is not that big deal
+
+Learnt:
+
+    //Time : O(n x l) -> n = length of strs, l = max length of a string in strs
+    //Space: O(n x l)
+
+//Time: 15+25min 
+*/
+
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string,vector <string>> map;
+
+        for(int i=0; i < strs.size(); i++){
+            string key = getKey(strs[i]);
+            map[key].push_back(strs[i]);
+        }   
+
+        vector<vector<string>> result;
+        for (auto it = map.begin(); it !=map.end(); it++){
+            result.push_back(it->second);
+        }
+        return result;
+    }
+private:
+    string getKey(string str){
+        vector<int> count(26); //26 positions initialized with zero
+        //counts how many of each letter agiven string it has
+
+        for(int j= 0; j<str.size(); j++){
+            count[str[j] -'a']++;
+        }
+
+        string key = "";
+        for(int i = 0; i<26;i++){
+            key.append(to_string(count[i] + 'a'));
+        }
+        cout << "key: " << key << endl;
+        return key;
+    }
+};
+
+
+// i was in the wrong track, so i peaked the video explained solution and tried to code it by myself
+
+/* class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string,vector <int>> vector_of_maps;
+        //map is: 'char':count for every string
+
+        vector<vector<string>> solution;
+        //cout << strs[0];
+        
+        // This fills the unordered maps of every word given
+        for (int i = 0; i< strs.size();i++){
+            cout << strs[i] << " "<< strs[i][0] << endl;
+            
+            
+            /* for(int j=0; j<strs[i].size();j++){
+                vector_of_maps[i][strs[i][j]]++;
+                //cout << strs[i][j] << endl;
+            } 
+        }
+
+        return solution;
+    }
+}; */
