@@ -1,0 +1,79 @@
+//Didnt really get this solution tbh: Recheck the video https://youtu.be/vzdNOK2oB2E
+
+//You may redo this, but i believe the solution is elegant, and unless you can't come up with it by yourself, the coding part here is not that big deal
+
+
+/*  Day 16/150 finished it - 2 days behind. Missed 12/06 and decided to take 20/06 birthday off
+    Neetcode: Solved 17/150
+    Leetcode: Solved 10 Easy 11 Medium
+Challenge: #704. Binary Search: Just to understand the binary search, and tried to implement it in a private function but coulndt do it. I then peaked the solution
+                                and was pretyy much the same that i was doing so i just copied
+Learnt:
+
+    Time: O(log n)
+    Space: O(1)
+
+//Time: 60min 
+*/
+
+// Since  the array is sorted this is a clear angle for  Binary Search
+#include <bits/stdc++.h>
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+
+            //if(nums.empty()){return -1;}
+            //int result = binary_search(nums, 0, nums.size()-1, target);
+            //return result;
+
+        
+        int low = 0;
+        int high = nums.size() - 1;
+        
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] < target) {
+                low = mid + 1;
+            } else if (nums[mid] > target) {
+                high = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        
+        return -1;
+    
+    }
+
+// Tried to implement a recursive, but for some reason it is not correctly returning the value, although it seems to function (2 iterations at least)
+// so i ended up using the one in the c++ library
+private:
+    int binary_search(vector<int>& arr, int left, int right, int target){
+        
+        if(right > left){
+            // If the element is present at 
+            // the middle itself
+            cout << "looking from: " << arr[left] << " to " << arr[right] << " | ";
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target){
+                cout << " deu certo";
+                return mid;
+                
+            }
+                
+            //if the target is at left
+            else if(arr[mid] < target){
+                cout << "left " <<arr[mid] << endl;
+                binary_search (arr, mid+1, right, target);
+            }
+
+            //if target will be on the right
+            else if(arr[mid] > target){
+                cout << "right " << arr[mid] << endl;
+                binary_search (arr, left, mid-1, target);
+            }
+        }
+        return -1;
+    }
+
+};
