@@ -8,7 +8,7 @@
     Leetcode: Solved 10 Easy 11 Medium
 Challenge: #704. Binary Search: Just to understand the binary search, and tried to implement it in a private function but coulndt do it. I then peaked the solution
                                 and was pretyy much the same that i was doing so i just copied
-Learnt:
+Learnt: Binary Search Fundamentals
 
     Time: O(log n)
     Space: O(1)
