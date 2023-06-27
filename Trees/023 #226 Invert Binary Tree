@@ -1,0 +1,42 @@
+/*  Day 18/150 finished it - 2 days behind. Missed 12/06 and decided to take 20/06 birthday off
+    Neetcode: Solved 19/150
+    Leetcode: Solved 11 Easy 12 Medium
+Challenge: #226. Invert Binary Tree
+
+Learnt: Not Much, had to peak solution to understand the TreeNode structure, and had no idea what the swap function was
+
+
+
+
+
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if (root == NULL){
+            return NULL;
+        }
+        swap(root->right,root->left);
+
+/*         root->right = root->left;
+        root->left = tmp; */
+
+        // For recursivity
+        invertTree(root->right);
+        invertTree(root->left);
+
+        return root;
+    }
+};
