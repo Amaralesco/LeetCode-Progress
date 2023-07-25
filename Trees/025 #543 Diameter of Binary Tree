@@ -1,0 +1,32 @@
+/*  Day 21/150 finished it - 
+    Neetcode: Solved 21/150
+    Leetcode: Solved 13 Easy 12 Medium
+Challenge: #543 Diameter of Binary Tree
+
+
+/* Given root of binary tree, return length of diameter of tree (longest path b/w any 2 nodes)
+
+    Time: O(n)
+    Space: O(n)
+
+ */
+class Solution {
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        int result = 0;
+        dfs(root, result);
+        return result;
+    }
+private:
+    int dfs(TreeNode* root, int& result) {
+        if (root == NULL) {
+            return 0;
+        }
+        
+        int left = dfs(root->left, result);
+        int right = dfs(root->right, result);
+        
+        result = max(result, left + right); //diameter of the current node
+        return 1 + max(left, right); //height of the current node, which is then used to calculate the result aka Diameter
+    }
+};
