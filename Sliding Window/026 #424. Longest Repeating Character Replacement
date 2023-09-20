@@ -1,0 +1,66 @@
+//Typical exercise for sliding window algorithm, increases the window while letter is different, reset once it is the same 
+// Peaked Solution to understand which data structure was being used: unordered set
+// Then it was a pretty easy
+
+
+/*  Day 21/150  
+    Neetcode: Solved 22/150
+    Leetcode: Solved 13 Easy 13 Medium
+Challenge: #424. Longest Repeating Character Replacement
+*/
+
+
+//Learnt:But i couldn't complete it 19/24 Problem Solving
+
+
+//Time: 25min 
+
+
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int initial=0;
+        int final = 1;
+        int changes_counter =0;
+        int result = 1;
+
+        while( final <= s.size()){
+            printf("iteration with initial:%d and final %d | Changes=%d \n", initial, final,changes_counter);
+
+            //Make this the new result, becase the rest of the iteration makes sure the nest window is "Ok"
+            if(final-initial > result){
+                result = final - initial;
+                printf(" Changed result to:%d-%d = %d \n",final,initial, final-initial);
+            }
+
+            if(result > s.size() - initial){
+                printf("can't find a bigger substring, we end with result:%d", result);
+                break;
+            }
+            
+            if(s[initial]==s[final]){
+                final++;
+            }
+            else{
+                //We found a different character, so we "change" the final character and move on.
+                if(changes_counter < k){
+                    changes_counter++;
+                    final++;
+                }
+                else /* if(changes_counter >= k) */{
+                    /* if(final-initial > result){
+                        result = final - initial;
+                        printf(" Changed result to:%d-%d = %d \n",final,initial, final-initial);
+                    } */
+                    printf("Next s[final] was different from subset, starting again with initial +1 ?\n");
+                    initial++;
+                    final= initial +1;
+                    changes_counter =0;
+                }
+            }     
+        }
+
+        return result;
+    }
+};
