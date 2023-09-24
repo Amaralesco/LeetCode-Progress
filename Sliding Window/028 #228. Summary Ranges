@@ -1,0 +1,110 @@
+/*  Day 22/150  
+    Neetcode: Solved 22/150
+    Leetcode: Solved 15 Easy 13 Medium
+Challenge: #228. Summary Ranges
+
+
+
+Good easy brute force challenge for problem solving skills
+passed 19/39 and then peaked the solution which is the code you find at the bottom of this file
+
+
+passes 19/32 tests: Problem was accessing nums[right+1] when it was non-existing, i made some coding gymnasticsto make it work, but was taking too long already so peaked a solution
+
+*/
+
+/* class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<string> output;
+        int left=0;
+        int right=left;
+        string aux_string;
+
+        if(nums.size()== 1){
+            output.push_back(to_string(nums[left]));
+            return output;
+        }
+
+        while( right<nums.size()){
+            printf("examining nums[%d]: %d\n", right, nums[right]);
+
+           
+
+            if(nums[right]+1 == nums[right+1]){
+                //included, increase right go next
+                right++;
+                if(right != nums.size()-1){
+                    continue;
+                }
+                
+                
+            }
+            // else / 
+            if(nums[right] == nums[left]){
+                aux_string = to_string(nums[left]);
+                output.push_back(aux_string);
+                left = right+1;
+                right = left;
+
+                if(right == nums.size()-1){
+                    output.push_back(to_string(nums[left]));
+                    return output;
+                }
+                
+            }
+            else{
+                //create string
+                aux_string =to_string(nums[left]) + "->" + to_string(nums[right]);
+                output.push_back(aux_string);
+                left = right+1; 
+                right = left;
+            }
+        }
+        return output;
+    }
+}; */
+
+//passes 19/32 tests: Problem was accessing nums[right+1] when it was non-existing, i made some coding gymnasticsto make it work, but was taking too long already so peaked a solution
+
+
+//This is the clean version of what i was trying to do above
+
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& arr) {
+        int n = arr.size(); // extracting size of the array
+        vector<string> ans; // declaring answer array to store our answer
+        
+        string temp = ""; // temproray string that stores all possible answer
+        
+        for(int i = 0; i < n; i++) // start traversing from the array
+        {
+            int j = i; // declare anthor pointer that will move
+            
+            // run that pointer until our range is not break
+            while(j + 1 < n && arr[j + 1] == arr[j] + 1)
+            {
+                j++;
+            }
+            
+            // if j > i, that means we got our range more than one element
+            if(j > i)
+            {
+                temp += to_string(arr[i]); // first store starting point
+                temp += "->"; // then store arrow, as question wants it
+                temp += to_string(arr[j]); // and lastly store the end point
+            }
+            else // we got only one element as range
+            {
+                temp += to_string(arr[i]); // then store that element in temp
+            }
+            
+            ans.push_back(temp); // push one possible answer string to our answer
+            temp = ""; // again reintiliaze temp for new possible answers
+            i = j; // and move i to j for a fresh start
+        }
+        
+        return ans; // and at last finally return the answer array
+    }
+};

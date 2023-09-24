@@ -1,8 +1,3 @@
-//Typical exercise for sliding window algorithm, increases the window while letter is different, reset once it is the same 
-// Peaked Solution to understand which data structure was being used: unordered set
-// Then it was a pretty easy
-
-
 /*  Day 21/150  
     Neetcode: Solved 22/150
     Leetcode: Solved 13 Easy 13 Medium

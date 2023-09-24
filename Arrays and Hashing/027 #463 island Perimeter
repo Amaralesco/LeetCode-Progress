@@ -1,0 +1,38 @@
+/*  Day 22/150  
+    Neetcode: Solved 22/150
+    Leetcode: Solved 14 Easy 13 Medium
+Challenge: #463. Island Perimeter
+
+
+Good easy brute force challenge for problem solving skills
+*/
+
+
+class Solution {
+public:
+    int islandPerimeter(vector<vector<int>>& grid) {
+        //vector<vector<vector<int><int><bool>>> aux; //example block x=1 y=1 true means row/col = 1 and has island 
+        int x=0;
+        int y=0;
+
+        int row = grid.size(), col = grid[0].size();
+        
+        int perimeter =0;
+
+        for(int x=0; x< row ; x++){
+            for(int y=0; y < col ; y++){
+                
+                if(grid[x][y]==1){
+                    perimeter = perimeter +4;
+
+                    if(x>0 && grid[x-1][y] == 1){perimeter = perimeter -2;}
+                    if(y>0 && grid[x][y-1] == 1){perimeter = perimeter -2;}
+
+                    printf("Debug x:%d y:%d perimeter: %d\n", x,y,perimeter);                    
+                }
+            }
+        }
+
+        return perimeter;
+    }
+};
