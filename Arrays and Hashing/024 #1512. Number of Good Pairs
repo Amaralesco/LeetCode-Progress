@@ -1,0 +1,49 @@
+/*  Day 19/150 
+    Neetcode: Solved 19/150
+    Leetcode: Solved 12 Easy 12 Medium
+Challenge: #1512. Number of Good Pairs
+
+
+Learnt: Basically only watched for the solution, since i only knew the brute force approach
+
+Great exercise to achieve O(n) instead of brute force O(n^2)
+
+
+/* class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        unordered_map<int,int> m;
+        for(int i=0; i<nums.size(); i++)
+        {
+            m[nums[i]]++;
+        }
+        int good_pairs = 0;
+        for(auto it : m)
+        {
+            int pairs = 0;
+            if(it.second > 1)
+            {
+                int n = it.second;
+                pairs = n*(n-1)/2;
+            }   
+            good_pairs += pairs;
+        }
+        return good_pairs;
+    }
+};
+ */
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& vec) {
+        int count = 0;
+        unordered_map<int, int> ump;
+        for(int i=0;i<vec.size();i++) {
+            if(ump[vec[i]] > 0) {
+                count += ump[vec[i]];
+            }
+            ump[vec[i]]++;
+        }
+        return count;
+    }
+};
