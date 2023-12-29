@@ -1,0 +1,59 @@
+/*   
+    Neetcode: Solved 24/150
+    Leetcode: Solved 16 Easy 14 Medium
+Challenge: #567. Permutation in String
+
+This one has a weird solution, that is hard to find out, but easy to code out
+*/
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        vector<int> count(26);
+        if( s1.size() > s2.size()){
+            return false;
+        }
+        for (int i = 0; i<s1.size(); i++){
+            count[s1.at(i) - 'a']++;
+            count[s2.at(i) - 'a']--;
+        }
+        if(isPermutation(count)){
+            return true;
+        }
+        
+        /* for (int i = 0; i < s2.size();i++){
+            count[s2.at(i) - 'a']++;
+            count[s2.at(i+s1.size()) - 'a']--;
+            
+            if(isPermutation(count)){
+                return true;
+            }
+        } */
+
+        for (int i = s1.size(); i < s2.size();i++){
+            count[s2.at(i-s1.size()) - 'a']++;
+            count[s2.at(i) - 'a']--;
+            
+            if(isPermutation(count)){
+                return true;
+            }
+        }
+
+
+    return false;
+    }
+
+private:
+
+    //They only match if in the window we are observing all the values in the array are 0
+    bool isPermutation(vector<int>& count) {
+        for (int i = 0; i < 26; i++) {
+             if (count[i] != 0) {
+                return false;
+            } 
+
+        }
+        return true;
+    }
+};
+
