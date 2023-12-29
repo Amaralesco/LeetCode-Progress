@@ -1,0 +1,46 @@
+/*   
+    Neetcode: Solved 24/150
+    Leetcode: Solved 17 Easy 14 Medium
+Challenge: #35. Search Insert Position
+
+
+Easy,made by myself. Had to peak the solutions to correct some of my mistakes but it was fine
+Belongs to the 100 most liked questions on Leetcode 
+*/
+
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int low=0;
+        int high = nums.size();
+        int mid;
+
+        if(target> nums[high-1]){
+            return high;
+        }
+
+        while(low<=high){
+            mid = (low+high)/2;
+            
+            if(nums[mid] == target ){
+                return mid;
+            }
+            
+            if(nums[mid] > target){
+                high = mid-1;
+                //low is the same
+
+            }
+            else //if(nums[mid] < target) 
+                {
+                low = mid +1;
+                //high is the same
+            }
+            
+        }
+        return low;
+
+    } 
+
+};
