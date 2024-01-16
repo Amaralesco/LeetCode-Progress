@@ -5,6 +5,7 @@ Challenge: #118. Pascal's Triangle
 
 Easy. Had some problems since i was accessing outside of memory.
 There is a way to solve this using recursion which i should try next
+40min
 */
 
 
