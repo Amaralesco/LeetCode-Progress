@@ -1,0 +1,49 @@
+/*   
+    Neetcode: Solved 24/150
+    Leetcode: Solved 19 Easy 15 Medium
+Challenge: #75. Sort Colors
+
+Tried for sometime using 2 pointers algorithm, but when i peeked the solution, ended up discovering about this 3 pointers algorithm. One for left, one for right and one to iterate through the middle
+Its called Dutch National Flag algorithm
+And from the description of the algorithm ended up finding the solution:
+
+The idea behind the algorithm is to keep all the 0s before the low pointer, all the 2s after the high pointer, and all the 1s between the low and high pointers.
+The algorithm moves the mid pointer through the array, comparing the value at each position with 1. If the value is 0, the element is swapped with the element at the low pointer, 
+and the low and mid pointers are incremented. If the value is 2, the element is swapped with the element at the high pointer, and the high pointer is decremented.
+If the value is 1, the mid pointer is simply incremented.
+40min
+*/
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+
+        int low = 0;
+        int high = nums.size()-1;
+        int mid = 0;
+        while(mid<=high){
+            if(nums[mid]==0)
+            {
+                printf("swaping [%d]:%d with [%d]:%d\n", low,nums[low],mid,nums[mid]);
+                swap(nums[low], nums[mid]); // Low might be iqual to mid, but we keep it this way for the sake of abstraction
+                low++;
+                mid++; 
+            }//Low will keep "0's" behind it
+            else if(nums[mid]==1)
+            {
+                printf("mid++\n", low,nums[low],mid,nums[mid]);
+                mid++;
+
+            }//mid will iterate the array, and keep "1's" behind him
+            else if(nums[mid]==2)
+            {
+                printf("swaping [%d]:%d with [%d]:%d\n", mid,nums[mid],high,nums[high]);
+                swap(nums[mid],nums[high]);
+                high--;
+            }// all the numbers after high will be "2's"
+        }
+    }
+};
+
+
