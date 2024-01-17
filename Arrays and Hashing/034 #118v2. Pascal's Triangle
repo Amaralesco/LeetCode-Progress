@@ -1,0 +1,60 @@
+/*   
+    Neetcode: Solved 24/150
+    Leetcode: Solved 19 Easy 14 Medium
+Challenge: #118. Pascal's Triangle
+
+Wanted to check out the recursion solutionfor this problem. Added some pritnfs to better understand
+40min
+*/
+
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) { 
+        if (numRows == 0) return {};
+        if (numRows == 1) return {{1}};
+
+        vector<vector<int>> prevRows = generate(numRows - 1);
+        vector<int> newRow(numRows, 1);
+
+        for (int i = 1; i < numRows - 1; i++) {
+            newRow[i] = prevRows.back()[i - 1] + prevRows.back()[i];
+            printf("newRow[%d]: %d\n", i,newRow[i] );
+        }
+        printf("Pushback ");
+
+        for (int i = 0; i< newRow.size(); i++){
+            printf("%d ",newRow[i]);
+        }
+        printf("\n");
+        prevRows.push_back(newRow);
+        return prevRows;
+    }
+};
+
+/* class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> solution;
+
+        for(int i = 0; i<numRows; i++)
+        {
+
+            vector<int> temp(i+1);
+            temp.front() =1; //temp[temp.size()]=1;
+            temp.back() = 1;
+            for (int j = 1; j<i;j++)
+            {
+                temp[j]= solution[i-1][j-1] + solution[i-1][j];
+            }
+            for (int j = 0;j<temp.size();j++ )
+            {
+                printf("%d",temp[j]);
+            }
+            printf("\n");
+        
+        solution.push_back(temp);
+        }
+        return solution;
+    }
+};
+ */
