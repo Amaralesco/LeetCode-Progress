@@ -1,0 +1,39 @@
+/*   
+    Neetcode: Solved 24/150
+    Leetcode: Solved 19 Easy 15 Medium
+Challenge: #2610. Convert an Array Into a 2D Array With Conditions
+
+Good medium challenge, took me 40min but managed to reach the right "algorithm" by myself - with great runtime too -
+All that was needed was some google searches requiring how to create an array inside 2D Arrays < solution.push_back(vector<int>()) >
+40min
+*/
+
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        unordered_map<int, int> map; // number:count of occurences
+        vector<vector<int>> solution;
+        solution.push_back(vector<int>());
+        
+        for (int i = 0; i < nums.size(); i++){
+            if (map.find(nums[i]) != map.end()){
+                //Found it
+                
+                map[nums[i]]++;
+                //printf("map[nums[i]]:%d | nums[i]:%d | solution.size():%d\n", map[nums[i]], nums[i], solution.size());
+            
+                if( map[nums[i]] > solution.size()){ //If true we have a repeated number which requires a new row.
+                    solution.push_back(vector<int>());
+                }
+                solution[map[nums[i]]-1].push_back(nums[i]); //Insert the new value
+
+
+            }
+            else{
+                map.insert({nums[i],1});
+                solution[0].push_back(nums[i]); // 0 here, equals map[nums[i]]-1 as well
+            }
+        }
+        return solution;
+    }
+};
