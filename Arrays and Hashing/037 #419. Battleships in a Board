@@ -1,0 +1,36 @@
+/*   
+    Neetcode: Solved 24/150
+    Leetcode: Solved 19 Easy 16 Medium
+Challenge: #419. Battleships in a Board
+
+
+Good medium challenge, similar to 027 #463. I realized with experience i wouldnt be able to access the "next" value in array and so i solved it also similarly to Island Perimeter
+?? min
+*/
+
+class Solution {
+public:
+    int countBattleships(vector<vector<char>>& board) {
+        int battleships_counter = 0;
+        
+        //Cycle through I and J
+        for (int i = 0; i<board.size(); i++){
+            for (int j = 0; j < board[i].size(); j++){
+                //Find a battleship
+                if(board[i][j] == 'X'){
+                    battleships_counter++;
+                    
+                    //Decrease the count if the X found has already been accounted for
+                    if (i > 0 && board[i-1][j] == 'X'){
+                        battleships_counter--; //Decrease the counter, since the X found has already been accounted for
+                    }
+                    if (j > 0 && board[i][j-1] == 'X'){
+                        battleships_counter--;  //Decrease the counter, since the X found has already been accounted for
+                    }
+
+                }
+            }
+        }
+        return battleships_counter;
+    }
+};
