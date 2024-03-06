@@ -1,0 +1,25 @@
+/*   
+    Neetcode: Solved 24/150
+    Leetcode: Solved 20 Easy 16 Medium
+Challenge: #1108. Defangin an IP Adress
+
+
+too easy
+8 min
+*/
+
+
+class Solution {
+public:
+    string defangIPaddr(string address) {
+        string solution;
+        for (int i = 0; i < address.length(); i++) {
+            if (address[i] == '.') {
+                solution = solution + "[.]";
+            } else {
+                solution += address[i];
+            }
+        }
+        return solution;
+    }
+};
