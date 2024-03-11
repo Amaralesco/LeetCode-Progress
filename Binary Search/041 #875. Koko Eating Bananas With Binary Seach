@@ -1,0 +1,101 @@
+/*   
+    Neetcode: Solved 25/150
+    Leetcode: Solved 20 Easy 17 Medium
+Challenge: #875. Koko Eating Bananasv2: With binary search. In the bottom solution from neetcode, which is more elegant
+
+
+
+Challenging Exercise, did it the bruteforce way, used the video to grasp more understanding on the binary search algorithm
+
+*/
+
+
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int min_speed = 1;
+        int max_speed = 0;
+        for (int i = 0; i < piles.size(); i++) {
+            max_speed = max(max_speed,piles[i]);
+        }
+        printf("Max speed: %d\n", max_speed);
+
+        int solution = max_speed;
+        int speed;
+        long int total_hours = 0;
+        
+        while (min_speed <= max_speed) {
+            speed = min_speed + (max_speed - min_speed) / 2;
+            total_hours = 0;
+            printf("\tTrying with speed: %d\n", speed);
+
+            for (auto const pile : piles) {
+                int amount_of_hours_for_this_pile = pile / speed;
+                if ((pile % speed) > 0) {
+                    amount_of_hours_for_this_pile++;
+                }
+                total_hours = total_hours + amount_of_hours_for_this_pile;
+            
+            }
+            printf("\tHours %d \n", total_hours);
+            if (total_hours > h) {
+                // Time expired - Too slow
+                printf("Speed of %d is too slow\n", speed);
+                min_speed = speed + 1;
+
+            }
+            if(total_hours <= h){
+                //possible solution
+                printf("Speed of: %d is possible, lets try slower\n", speed);
+                solution = min(solution,speed);
+                max_speed = speed - 1 ;
+
+            }
+
+        }
+        return solution;
+    }
+};
+
+
+/*
+    Given array of banana piles, guards are gone for h hours
+    Return min int k such that can eat all banans within h
+    Ex. piles = [3,6,7,11] h = 8 -> 4 (1@3, 2@6, 2@7, 3@11)
+
+    Binary search, for each k count hours needed, store min
+
+    Time: O(n x log m) -> n = # of piles, m = max # in a pile
+    Space: O(1)
+*/
+
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int n = piles.size();
+        
+        int low = 1;
+        int high = 0;
+        for (int i = 0; i < n; i++) {
+            high = max(high, piles[i]);
+        }
+        
+        int result = high;
+        
+        while (low <= high) {
+            int k = low + (high - low) / 2;
+            long int hours = 0;
+            for (int i = 0; i < n; i++) {
+                hours += ceil((double) piles[i] / k);
+            }
+            if (hours <= h) {
+                result = min(result, k);
+                high = k - 1;
+            } else {
+                low = k + 1;
+            }
+        }
+        
+        return result;
+    }
+};
