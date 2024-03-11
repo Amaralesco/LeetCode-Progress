@@ -1,0 +1,44 @@
+/*   
+    Neetcode: Solved 25/150
+    Leetcode: Solved 20 Easy 17 Medium
+Challenge: #875. Koko Eating Bananas
+
+
+
+Challenging Exercise, did it the bruteforce way, used the video to grasp more understanding on the binary search algorithm
+*/
+
+
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int speed = 1;
+        int count = 0;
+        bool expired = false;
+        while (true) {
+            for (auto const pile : piles) {
+                int amount_of_hours = pile / speed;
+                if ((pile % speed) > 0) {
+                    amount_of_hours++;
+                }
+                count = count + amount_of_hours;
+                if(count>h){
+                    //Time expired
+                    printf("Expired with speed: %d\n", speed);
+                    expired = true;
+                    count = 0;
+                    break;
+                }
+            }
+            if(expired){
+                expired = false;
+                speed++;
+            }
+            else{
+                return speed;
+            }
+        }
+
+        return count;
+    }
+};
