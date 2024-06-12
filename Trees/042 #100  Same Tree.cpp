@@ -4,6 +4,8 @@
 Challenge: #100  Same Tree. Find if 2 trees are identical 
 
 Pretty easy while looking at the previous exercises. The only new thing was that i could access tree->val instead of just tree->left and tree->right.
+More compact NeetCode solution at the EoF
+
 */
 
 
@@ -38,3 +40,21 @@ private:
         return;
     }
 };
+
+/*
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if (p == NULL && q == NULL) {
+            return true;
+        }
+        if (p == NULL || q == NULL) {
+            return false;
+        }
+        if (p->val != q->val) {
+            return false;
+        }
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    }
+};
+*/
