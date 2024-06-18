@@ -1,0 +1,33 @@
+/*   
+    Neetcode: Solved 29/150
+    Leetcode: Solved 21 Easy 20 Medium
+Challenge: 045 #739. Daily Temperatures
+ 
+Was taking too long to come up with a solution so i decided to watch the video solution.
+Good Problem solving exercise, because the code implementation is not that hard after figuring out the problem
+
+*/
+
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        stack<pair<int, int>> myStack; // <index,tempreature>
+        vector<int> result(temperatures.size());
+
+        for (int i = 0; i < temperatures.size(); i++){
+            int currDay = i;
+            int currTemp = temperatures[i];
+
+            while(!myStack.empty() && temperatures[i] > myStack.top().second){
+                int prevDay = myStack.top().first;
+                int prevTemp = myStack.top().second;
+                
+                printf("analysing %d to Top%d\n", temperatures[i], myStack.top().second); 
+                myStack.pop();
+                result[prevDay] = currDay - prevDay;
+            }
+            myStack.push({i, temperatures[i]});           
+        }
+        return result;
+    }
+};
