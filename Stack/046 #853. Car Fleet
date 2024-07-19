@@ -1,0 +1,36 @@
+/*   
+    Neetcode: Solved 30/150
+    Leetcode: Solved 22 Easy 20 Medium
+Challenge: 046 853. Car Fleet
+ 
+Couldn't do it, spcially without stack. When peaking solution they are also using stack and its the one you see below
+
+*/
+
+class Solution {
+public:
+    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+        
+        vector<pair<int, double>> cars;
+        for (int i = 0; i < position.size(); i++){
+            double time = (double) (target - position[i]) / speed[i];
+            cars.push_back({position[i], time});
+        }
+        sort(cars.begin(), cars.end());
+
+
+
+        double maxTime = 0.0;
+        int result = 0;
+        
+        for (int i = position.size() - 1; i >= 0; i--) {
+            double time = cars[i].second;
+            if (time > maxTime) {
+                maxTime = time;
+                result++;
+            }
+        }
+        
+        return result;
+    }
+};
